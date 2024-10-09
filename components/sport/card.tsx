@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React from "react";
 import { Team } from "@/interfaces/sport";
 import { FaFootballBall, FaFlag } from "react-icons/fa";
 import { betStore } from "@/stores/bet";
