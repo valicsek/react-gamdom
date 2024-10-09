@@ -5,6 +5,35 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-color: #03ff85;
+  --secondary-color: #1d2329;
+  --tertiary-color: #0b131c;
+  --bg-competitor1: #35ff97;
+  --text-competitor1: #35ff97;
+  --bg-competitor2: #489eff;
+  --text-competitor2: #489eff;
+  --bg-main-lighter: rgba(255, 255, 255, 0.2);
+  --text-default: #7c8398;
+  --text-lighter: #ffffff;
+  --text-highlighted: #ffffff;
+  --text-active: #35ffb5;
+  --body-main: #0a1119;
+  --active-dark: #262b3b;
+  --text-inverted: unset;
+  --bg-main-light: unset;
+  --bg-main-elements: #1d2329;
+  --bg-main-layouts: #131a22;
+  --bg-main-body: #0d141c;
+  --bg-light-grey: #32374a;
+  --bg-active: #006ae5;
+  --bg-main-elements-active: unset;
+  --bg-panel: unset;
+  --bg-card: #121a22;
+  --bg-alert-regular: unset;
+  --red-bg-color: #ff3535;
+  --borders-main: unset;
+  --bg-error: unset;
+  --bg-navbar: #0d141c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,6 +47,11 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+
+  background-image: url("/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @layer utilities {
