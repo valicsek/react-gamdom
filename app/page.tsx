@@ -50,7 +50,7 @@ const Home: React.FC = () => {
   const activeSport = useMemo(() => sportFilters.find((filter) => filter.isActive)?.title, [sportFilters]);
   const filteredGames = useMemo(() => sportStore.sports.filter((game) => game.sport === activeSport), [sportStore.sports, activeSport]);
 
-  const handleFilterClick = (title: string) => {
+  const onSportFilterClick = (title: string) => {
     setSportFilters((prevFilters) => prevFilters.map((filter) => (filter.title === title ? { ...filter, isActive: true } : { ...filter, isActive: false })));
   };
 
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
       <h1 className="text-xl font-bold text-white">Betting Dashboard - Sport Games</h1>
       <div className="flex gap-1 overflow-x-auto">
         {sportFilters.map((sport) => (
-          <SportFilter key={sport.title} title={sport.title} Icon={sport.Icon} isActive={sport.isActive} onClick={() => handleFilterClick(sport.title)} />
+          <SportFilter key={sport.title} title={sport.title} Icon={sport.Icon} isActive={sport.isActive} onClick={() => onSportFilterClick(sport.title)} />
         ))}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">

@@ -5,8 +5,8 @@ interface InputProps {
   type?: "text" | "number" | "email" | "password" | "select";
   options?: { label: string; value: string | number }[];
   placeholder?: string;
-  value?: string | number;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  value?: string | number | null;
+  onChange?: (value: string | number | null) => void;
   prefix?: string;
 }
 
@@ -15,10 +15,16 @@ const Input: React.FC<InputProps> = ({ className, type = "text", placeholder = "
     <div className={`flex flex-row items-center bg-[var(--body-main)] text-md p-2 rounded-lg font-bold ${className}`}>
       {prefix && <span className="text-white text-md">{prefix}</span>}
       {type != "select" && (
-        <input type={type} className={`px-8 bg-transparent w-full focus:outline-none ${className}`} placeholder={placeholder} value={value} onChange={onChange} />
+        <input
+          type={type}
+          className={`px-8 bg-transparent w-full focus:outline-none ${className}`}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange?.(e.target.value)}
+        />
       )}
       {type == "select" && (
-        <select className={`bg-transparent w-full focus:outline-none ${className}`} onChange={onChange} value={value}>
+        <select className={`bg-transparent w-full focus:outline-none ${className}`} onChange={(e) => onChange?.(e.target.value)} value={value}>
           <option value="" disabled>
             Select element
           </option>
