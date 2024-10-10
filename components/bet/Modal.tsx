@@ -12,21 +12,24 @@ interface BetModalProps {
 }
 
 const BetModal: React.FC<BetModalProps> = ({ isOpen, onClose }) => {
-  const [betAmount, setBetAmount] = useState<number>(0);
   const [selectedBetTeam, setSelectedBetTeam] = useState<number | null>(null);
+  const [betAmount, setBetAmount] = useState<number | null>(null);
   const [teams, setTeams] = useState<Team[]>([]);
   const [teamOptions, setTeamOptions] = useState<{ label: string; value: number }[]>([]);
-
-  useEffect(() => {
-    if (teams.length) setTeamOptions(teams.map((team) => ({ label: team.name, value: team.id })));
-  }, [teams]);
 
   useEffect(() => {
     if (sportStore.selectedSport) setTeams(sportStore.selectedSport.teams);
   }, [sportStore.selectedSport]);
 
+  useEffect(() => {
+    if (teams.length) {
+      setTeamOptions(teams.map((team) => ({ label: team.name, value: team.id })));
+      setSelectedBetTeam(teams[0].id);
+    }
+  }, [teams]);
+
   const onPlaceBet = () => {
-    if (betAmount <= 0 || !selectedBetTeam) return;
+    if (!betAmount || !selectedBetTeam) return;
 
     betStore.addBet({
       teamId: selectedBetTeam,
@@ -35,7 +38,7 @@ const BetModal: React.FC<BetModalProps> = ({ isOpen, onClose }) => {
       createdAt: new Date(),
     });
 
-    setBetAmount(0);
+    setBetAmount(null);
     onClose();
   };
 

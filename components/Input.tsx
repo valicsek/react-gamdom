@@ -6,7 +6,7 @@ interface InputProps {
   options?: { label: string; value: string | number }[];
   placeholder?: string;
   value?: string | number | null;
-  onChange?: (value: string | number | null) => void;
+  onChange?: (value: string | number) => void;
   prefix?: string;
 }
 
@@ -19,12 +19,12 @@ const Input: React.FC<InputProps> = ({ className, type = "text", placeholder = "
           type={type}
           className={`px-8 bg-transparent w-full focus:outline-none ${className}`}
           placeholder={placeholder}
-          value={value}
+          value={value ?? ""}
           onChange={(e) => onChange?.(e.target.value)}
         />
       )}
       {type == "select" && (
-        <select className={`bg-transparent w-full focus:outline-none ${className}`} onChange={(e) => onChange?.(e.target.value)} value={value}>
+        <select className={`bg-transparent w-full focus:outline-none ${className}`} onChange={(e) => onChange?.(e.target.value)} value={value ?? ""}>
           <option value="" disabled>
             Select element
           </option>
