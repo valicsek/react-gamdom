@@ -11,7 +11,6 @@ class BetStore {
 
   getBets = async () => {
     this.bets = await betService.fetchBets();
-    console.log(this.bets);
   };
 
   addBet = async (bet: Bet) => {

@@ -6,7 +6,7 @@ class SportService {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(SPORT_MOCK);
-      }, 1000);
+      }, 250);
     });
   }
 }

@@ -18,6 +18,7 @@ export interface SportGame {
 
 export interface Bet {
   id: number;
+  userId?: number;
   sportGameId: number;
   teamId: number;
   amount: number;

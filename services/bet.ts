@@ -7,7 +7,7 @@ class BetService {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(this.bets);
-      }, 1000);
+      }, 250);
     });
   }
 
@@ -16,7 +16,7 @@ class BetService {
       setTimeout(() => {
         this.bets.push(bet);
         resolve(bet);
-      }, 1000);
+      }, 250);
     });
   }
 
@@ -25,7 +25,7 @@ class BetService {
       setTimeout(() => {
         this.bets = this.bets.filter((bet) => bet.id !== id);
         resolve();
-      }, 1000);
+      }, 250);
     });
   }
 }
