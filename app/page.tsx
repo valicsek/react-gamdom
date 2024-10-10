@@ -1,14 +1,16 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { observer } from "mobx-react-lite";
 import { sportStore } from "@/stores/sport";
 import { Sport } from "@/interfaces";
 import { FaBaseballBall, FaBasketballBall, FaFootballBall, FaHockeyPuck, FaTableTennis, FaVolleyballBall } from "react-icons/fa";
 import SportCard from "@/components/sport/card";
 import SportFilter from "@/components/sport/filter";
 import BetModal from "@/components/bet/Modal";
+import LoadingIndicator from "@/components/LoadingIndicator";
 
-const Home: React.FC = () => {
+const Home: React.FC = observer(() => {
   const [sportFilters, setSportFilters] = useState([
     {
       title: "Football",
@@ -50,6 +52,10 @@ const Home: React.FC = () => {
   const activeSport = useMemo(() => sportFilters.find((filter) => filter.isActive)?.title, [sportFilters]);
   const filteredGames = useMemo(() => sportStore.sports.filter((game) => game.sport === activeSport), [sportStore.sports, activeSport]);
 
+  useEffect(() => {
+    sportStore.getSports();
+  }, []);
+
   const onSportFilterClick = (title: string) => {
     setSportFilters((prevFilters) => prevFilters.map((filter) => (filter.title === title ? { ...filter, isActive: true } : { ...filter, isActive: false })));
   };
@@ -76,12 +82,12 @@ const Home: React.FC = () => {
         {filteredGames.length > 0 ? (
           filteredGames.map((game, index) => <SportCard key={`${game.sport}-${index}`} {...game} onBetClick={() => onBetClick(game)} />)
         ) : (
-          <p className="text-white">No games available for {activeSport}</p>
+          <>{sportStore.isLoading ? <LoadingIndicator /> : <p className="text-white">No games available for {activeSport}</p>}</>
         )}
       </div>
       <BetModal isOpen={isModalOpen} onClose={closeBetModal} />
     </div>
   );
-};
+});
 
 export default Home;

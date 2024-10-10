@@ -1,29 +1,28 @@
 import { makeAutoObservable } from "mobx";
 import { Sport } from "@/interfaces";
-import { SPORT_MOCK } from "@/utils/sport.mock";
+import { sportService } from "@/services/sport";
 
 class SportStore {
   selectedSport: Sport | null = null;
-  sports: Sport[] = SPORT_MOCK;
+  sports: Sport[] = [];
+  isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  addSport = (sport: Sport) => {
-    this.sports.push(sport);
-  };
-
-  removeSport = (sport: Sport) => {
-    this.sports = this.sports.filter((s) => s.sport !== sport.sport);
-  };
-
-  updateSport = (sport: Sport) => {
-    this.sports = this.sports.map((s) => (s.sport === sport.sport ? sport : s));
+  getSports = async () => {
+    this.setIsLoading(true);
+    this.sports = await sportService.fetchSports();
+    this.setIsLoading(false);
   };
 
   setSelectedSport = (sport: Sport) => {
     this.selectedSport = sport;
+  };
+
+  setIsLoading = (isLoading: boolean) => {
+    this.isLoading = isLoading;
   };
 }
 

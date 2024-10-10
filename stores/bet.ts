@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { Bet } from "@/interfaces";
+import { betService } from "@/services/bet";
 
 class BetStore {
   bets: Bet[] = [];
@@ -8,16 +9,19 @@ class BetStore {
     makeAutoObservable(this);
   }
 
-  addBet = (bet: Bet) => {
-    this.bets.push(bet);
+  getBets = async () => {
+    this.bets = await betService.fetchBets();
+    console.log(this.bets);
   };
 
-  removeBet = (bet: Bet) => {
+  addBet = async (bet: Bet) => {
+    const newBet = await betService.createBet(bet);
+    this.bets.push(newBet);
+  };
+
+  removeBet = async (bet: Bet) => {
+    await betService.deleteBet(bet.id);
     this.bets = this.bets.filter((b) => b.id !== bet.id);
-  };
-
-  updateBet = (bet: Bet) => {
-    this.bets = this.bets.map((b) => (b.id === bet.id ? bet : b));
   };
 }
 
