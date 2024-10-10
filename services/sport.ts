@@ -1,8 +1,8 @@
-import { Sport } from "@/interfaces";
+import { SportGame } from "@/interfaces";
 import { SPORT_MOCK } from "@/utils/sport.mock";
 
 class SportService {
-  async fetchSports(): Promise<Sport[]> {
+  async fetchSports(): Promise<SportGame[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(SPORT_MOCK);

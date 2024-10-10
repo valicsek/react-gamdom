@@ -1,4 +1,6 @@
-export const SPORT_MOCK = [
+import { SportGame } from "@/interfaces";
+
+export const SPORT_MOCK: SportGame[] = [
   {
     id: 1,
     sport: "Football",

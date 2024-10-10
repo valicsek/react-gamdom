@@ -29,9 +29,10 @@ const BetModal: React.FC<BetModalProps> = ({ isOpen, onClose }) => {
   }, [teams]);
 
   const onPlaceBet = () => {
-    if (!betAmount || !selectedBetTeam) return;
+    if (!betAmount || !selectedBetTeam || !sportStore.selectedSport) return;
 
     betStore.addBet({
+      sportGameId: sportStore.selectedSport.id,
       teamId: selectedBetTeam,
       id: Date.now(),
       amount: betAmount,
@@ -42,10 +43,21 @@ const BetModal: React.FC<BetModalProps> = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  const handleBetAmountChange = (value: string | number) => {
+    const numValue = Number(value);
+    if (!isNaN(numValue) && numValue >= 0) {
+      setBetAmount(numValue);
+    }
+  };
+
+  const handleTeamSelect = (value: string | number) => {
+    setSelectedBetTeam(Number(value));
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Betting Modal">
-      <Input type="select" options={teamOptions} placeholder="Select team" value={selectedBetTeam} onChange={(e) => setSelectedBetTeam(Number(e))} />
-      <Input type="number" placeholder="Bet amount" prefix="$" value={betAmount} onChange={(e) => setBetAmount(Number(e))} />
+      <Input type="select" options={teamOptions} placeholder="Select team" value={selectedBetTeam} onChange={handleTeamSelect} />
+      <Input type="number" placeholder="Bet amount" prefix="$" value={betAmount} onChange={handleBetAmountChange} />
       <div slot="footer" className="flex flex-row gap-4">
         <Button className="w-full" variant="primary" onClick={onPlaceBet} disabled={!betAmount || !selectedBetTeam}>
           Place Bet

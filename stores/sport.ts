@@ -1,10 +1,10 @@
 import { makeAutoObservable } from "mobx";
-import { Sport } from "@/interfaces";
+import { SportGame } from "@/interfaces";
 import { sportService } from "@/services/sport";
 
 class SportStore {
-  selectedSport: Sport | null = null;
-  sports: Sport[] = [];
+  selectedSport: SportGame | null = null;
+  sports: SportGame[] = [];
   isLoading: boolean = false;
 
   constructor() {
@@ -17,7 +17,7 @@ class SportStore {
     this.setIsLoading(false);
   };
 
-  setSelectedSport = (sport: Sport) => {
+  setSelectedSport = (sport: SportGame) => {
     this.selectedSport = sport;
   };
 

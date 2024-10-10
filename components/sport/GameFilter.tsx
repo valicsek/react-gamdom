@@ -1,14 +1,14 @@
 import React from "react";
 import { IconType } from "react-icons";
 
-interface SportFilterItemProps {
+interface SportGameFilterProps {
   title: string;
   Icon: IconType;
   isActive: boolean;
   onClick: () => void;
 }
 
-const SportFilterItem: React.FC<SportFilterItemProps> = ({ title, Icon, isActive, onClick }) => {
+const SportGameFilter: React.FC<SportGameFilterProps> = ({ title, Icon, isActive, onClick }) => {
   return (
     <div
       data-testid="sport-filter-item"
@@ -21,4 +21,4 @@ const SportFilterItem: React.FC<SportFilterItemProps> = ({ title, Icon, isActive
   );
 };
 
-export default SportFilterItem;
+export default SportGameFilter;

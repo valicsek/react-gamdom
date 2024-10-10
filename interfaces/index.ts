@@ -3,12 +3,12 @@ export interface Team {
   name: string;
 }
 
-export interface Sport {
+export interface SportGame {
   id: number;
   sport: string;
   date: string;
   time: string;
-  teams: Team[];
+  teams: [Team, Team];
   odds: {
     team1: number;
     team2: number;
@@ -18,6 +18,7 @@ export interface Sport {
 
 export interface Bet {
   id: number;
+  sportGameId: number;
   teamId: number;
   amount: number;
   createdAt: Date;
