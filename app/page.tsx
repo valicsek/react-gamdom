@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { sportStore } from "@/stores/sport";
-import { Sport } from "@/interfaces/sport";
+import { Sport } from "@/interfaces";
 import { FaBaseballBall, FaBasketballBall, FaFootballBall, FaHockeyPuck, FaTableTennis, FaVolleyballBall } from "react-icons/fa";
 import SportCard from "@/components/sport/card";
 import SportFilter from "@/components/sport/filter";

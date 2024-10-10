@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { betStore } from "@/stores/bet";
-import { Team } from "@/interfaces/sport";
+import { Team } from "@/interfaces";
 import { sportStore } from "@/stores/sport";
 import Input from "@/components/Input";
 import Modal from "@/components/Modal";

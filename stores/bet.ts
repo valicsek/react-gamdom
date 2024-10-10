@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { Bet } from "@/interfaces/sport";
+import { Bet } from "@/interfaces";
 
 class BetStore {
   bets: Bet[] = [];

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Team } from "@/interfaces/sport";
+import { Team } from "@/interfaces";
 import { FaFootballBall, FaFlag } from "react-icons/fa";
 import { betStore } from "@/stores/bet";
 
