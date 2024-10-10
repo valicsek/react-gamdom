@@ -60,6 +60,7 @@ const SportGameCard: React.FC<SportGameCardProps> = ({ sport, date, time, teams,
           { label: "2", value: odds.team2 },
         ].map(({ label, value }) => (
           <div
+            data-testid="sport-card-item-bet"
             key={label}
             className="flex-1 flex flex-col items-center p-2  cursor-pointer bg-[var(--bg-main-elements)] hover:bg-[var(--primary-color)] hover:text-black"
             onClick={() => onBetClick(label)}
@@ -73,7 +74,7 @@ const SportGameCard: React.FC<SportGameCardProps> = ({ sport, date, time, teams,
   };
 
   return (
-    <div className="bg-[var(--bg-card)] rounded-lg overflow-hidden shadow-lg flex flex-col">
+    <div data-testid="sport-card-item" className="bg-[var(--bg-card)] rounded-lg overflow-hidden shadow-lg flex flex-col">
       {header()}
       {body()}
       {footer()}
