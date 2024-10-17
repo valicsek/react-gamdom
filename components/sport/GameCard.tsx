@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { memo } from "react";
 import { observer } from "mobx-react-lite";
 import { Team } from "@/interfaces";
 import { FaFootballBall, FaFlag } from "react-icons/fa";
@@ -20,9 +20,9 @@ interface SportGameCardProps {
   onBetClick: (bet: string) => void;
 }
 
-const SportGameCard: React.FC<SportGameCardProps> = observer(({ id, sport, date, time, teams, odds, onBetClick }) => {
-  const getBetsCount = betStore.bets;
+const BetCount = observer(({ gameId, teamId }: { gameId: number; teamId: number }) => <span className="text-white font-bold">{betStore.getBetsCountForGame(gameId, teamId)}</span>);
 
+const SportGameCard: React.FC<SportGameCardProps> = ({ id, sport, date, time, teams, odds, onBetClick }) => {
   const header = (
     <div className="flex items-center gap-2 p-2">
       <FaFootballBall className="text-white" />
@@ -40,7 +40,7 @@ const SportGameCard: React.FC<SportGameCardProps> = observer(({ id, sport, date,
             <FaFlag className="text-white" />
             <span className="text-white">{team.name}</span>
           </div>
-          <span className="text-white font-bold">{getBetsCount.filter((bet) => bet.teamId === team.id && bet.sportGameId === id).length}</span>
+          <BetCount gameId={id} teamId={team.id} />
         </div>
       ))}
     </div>
@@ -73,6 +73,6 @@ const SportGameCard: React.FC<SportGameCardProps> = observer(({ id, sport, date,
       {footer}
     </div>
   );
-});
+};
 
-export default SportGameCard;
+export default memo(SportGameCard);
