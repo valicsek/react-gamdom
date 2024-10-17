@@ -22,6 +22,10 @@ class BetStore {
     await betService.deleteBet(bet.id);
     this.bets = this.bets.filter((b) => b.id !== bet.id);
   };
+
+  getBetsCountForGame(gameId: number, teamId: number) {
+    return this.bets.filter((bet) => bet.sportGameId === gameId && bet.teamId === teamId).length;
+  }
 }
 
 export const betStore = new BetStore();
